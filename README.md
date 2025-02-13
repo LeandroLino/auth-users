@@ -1,10 +1,12 @@
-## Crud inicial
+## Crud simples para testar autenticações 
 
 - NodeJs
 - MySql
 - Docker
 - Express
 - Sequelize
+
+#### É possivel acessar as requests dentro da pasta assets
 
 ## Subir MySql com Docker
 
