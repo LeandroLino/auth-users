@@ -1,4 +1,4 @@
-## Crud inicial
+## Crud simples para testar autenticações 
 
 - NodeJs
 - MySql
