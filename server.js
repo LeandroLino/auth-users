@@ -5,7 +5,7 @@ const routes = require('./app/routes/product.routes');
 const app = express();
 
 var corsOptions = {
-	origin: 'http://localhost:8081',
+	origin: 'http://localhost:3000',
 };
 
 app.use(cors(corsOptions));
@@ -18,14 +18,17 @@ app.use(express.urlencoded({ extended: true }));
 
 const db = require('./app/models');
 
-db.sequelize
-	.sync()
-	.then(() => {
-		console.log('Synced db.');
-	})
-	.catch((err) => {
-		console.log('Failed to sync db: ' + err.message);
-	});
+// Aguarda 10 segundos antes de tentar conectar
+setTimeout(() => {
+	db.sequelize
+		.sync()
+		.then(() => {
+			console.log('Synced db.');
+		})
+		.catch((err) => {
+			console.log('Failed to sync db: ' + err.message);
+		});
+}, 10000); // 10 segundos
 
 // // drop the table if it already exists
 // db.sequelize.sync({ force: true }).then(() => {
@@ -38,7 +41,7 @@ app.get('/', (req, res) => {
 
 require('./app/routes/product.routes')(app);
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
 	console.log(`Server is running on port ${PORT}.`);
 });

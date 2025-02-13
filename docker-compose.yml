@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - '3000:3000'
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=secret
+      - MYSQL_DB=mydatabase
+    depends_on:
+      - db
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: secret # Senha do usuário root
+      MYSQL_DATABASE: mydatabase # Nome do banco de dados que será criado automaticamente
+      MYSQL_USER: root # Usuário personalizado (opcional)
+      MYSQL_PASSWORD: secret # Senha do usuário personalizado (opcional)
+    ports:
+      - '3306:3306' # Mapeia a porta 3306 do contêiner para a porta 3306 do host
+    volumes:
+      - mysql-data:/var/lib/mysql # Persistência de dados
+
+volumes:
+  mysql-data:
