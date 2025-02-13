@@ -1,30 +1,27 @@
+version: '3.8'
+
 services:
   app:
     build: .
     ports:
-      - '3000:3000'
+      - '3000:3000' # Mapeia a porta 3000 do contêiner para a porta 3000 do host
+    volumes:
+      - .:/usr/src/app # Sincroniza o diretório local com o contêiner
+      - /usr/src/app/node_modules # Ignora a pasta node_modules local
     environment:
-      - MYSQL_HOST=db
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=secret
-      - MYSQL_DB=mydatabase
+      - NODE_ENV=development
     depends_on:
       - db
-    volumes:
-      - .:/usr/src/app
-      - /usr/src/app/node_modules
 
   db:
     image: mysql:5.7
     environment:
-      MYSQL_ROOT_PASSWORD: secret # Senha do usuário root
-      MYSQL_DATABASE: mydatabase # Nome do banco de dados que será criado automaticamente
-      MYSQL_USER: root # Usuário personalizado (opcional)
-      MYSQL_PASSWORD: secret # Senha do usuário personalizado (opcional)
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: mydatabase
     ports:
-      - '3306:3306' # Mapeia a porta 3306 do contêiner para a porta 3306 do host
+      - '3306:3306'
     volumes:
-      - mysql-data:/var/lib/mysql # Persistência de dados
+      - mysql-data:/var/lib/mysql
 
 volumes:
   mysql-data:

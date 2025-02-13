@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const routes = require('./app/routes/product.routes');
 
 const app = express();
 
@@ -35,11 +34,7 @@ setTimeout(() => {
 //   console.log("Drop and re-sync db.");
 // });
 
-app.get('/', (req, res) => {
-	res.json({ message: 'Welcome to bezkoder application.' });
-});
-
-require('./app/routes/product.routes')(app);
+require('./app/routes/user.routes')(app);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

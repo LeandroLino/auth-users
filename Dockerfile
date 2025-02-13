@@ -7,8 +7,11 @@ WORKDIR /usr/src/app
 # Copia os arquivos de configuração
 COPY package*.json ./
 
-# Instala as dependências
+# Instala as dependências (incluindo Nodemon como dependência de desenvolvimento)
 RUN npm install
+
+# Se você preferir instalar o Nodemon globalmente, use:
+# RUN npm install -g nodemon
 
 # Copia o restante do código da aplicação
 COPY . .
@@ -16,5 +19,5 @@ COPY . .
 # Expõe a porta que a aplicação vai rodar
 EXPOSE 3000
 
-# Comando para rodar a aplicação (agora usando server.js)
-CMD ["node", "server.js"]
+# Comando para rodar a aplicação com Nodemon
+CMD ["npx", "nodemon", "server.js"]
