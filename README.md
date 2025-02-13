@@ -6,6 +6,8 @@
 - Express
 - Sequelize
 
+## É possivel acessar as requests dentro da pasta assets
+
 ## Subir MySql com Docker
 
 [Acesse para ver mais](https://moored-cloth-8a0.notion.site/MySql-198a8307e2988040b473f04f9b12f719?pvs=4)
