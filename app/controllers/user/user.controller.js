@@ -20,10 +20,11 @@ exports.register = async (req, res) => {
 			cpf,
 		});
 
-		return res.status(201).json(newUser);
+		const token = utils.generateToken(newUser);
+
+		return res.status(201).json({ token: token });
 	} catch (error) {
-		return res.status(500).json({
-			message: 'Erro ao criar usuário.',
+		return res.status(400).json({
 			error: error.message,
 		});
 	}
@@ -50,10 +51,11 @@ exports.login = async (req, res) => {
 			throw new Error('Wrong email or password!');
 		}
 
-		return res.status(201).json(user);
+		const token = utils.generateToken(user);
+
+		return res.status(201).json({ token: token });
 	} catch (error) {
 		return res.status(403).json({
-			message: 'Erro ao fazer login',
 			error: error.message,
 		});
 	}

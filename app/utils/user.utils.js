@@ -1,8 +1,30 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 async function matchPassword(password, userPassword) {
 	return await bcrypt.compare(password, userPassword);
 }
+
+const generateToken = (user) => {
+	return jwt.sign(
+		{
+			id: user.id,
+			email: user.email,
+			name: user.name,
+		},
+		process.env.SECRET_KEY,
+		{ expiresIn: '1h' }
+	);
+};
+
+const verifyToken = (token) => {
+	try {
+		return jwt.verify(token, process.env.SECRET_KEY);
+	} catch (error) {
+		return null;
+	}
+};
 
 const hashPassword = async (password) => {
 	const saltRounds = 10;
@@ -49,4 +71,6 @@ module.exports = {
 	validateCPF,
 	hashPassword,
 	matchPassword,
+	generateToken,
+	verifyToken,
 };
