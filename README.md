@@ -1,4 +1,4 @@
-## Crud simples para testar autenticações 
+## Crud simples para testar autenticações
 
 - NodeJs
 - MySql
@@ -61,3 +61,26 @@ Se você quiser remover tudo, incluindo os dados, use:
 ```
 docker-compose down -v
 ```
+
+## Criação de usuário Admin utilizando migrations
+
+### Iniciação de migration. <br>
+
+Essa etapa não é necessária para esse repositório, mas achei interessante ressaltar.
+
+No terminal, execute:
+
+```
+npx sequelize-cli migration:generate --name create-admin-user
+```
+
+Isso irá criar uma pasta chamada `migrations` com um arquivo dentro dela na raiz do projeto.
+
+Então com a pasta criada e o arquivo dentro dela configurado (Esse repositório já tem essa configuração)<br>
+você deve executar:
+
+```
+npx sequelize-cli db:migrate
+```
+
+Então sim o usuário admin será criado.

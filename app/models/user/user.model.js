@@ -21,6 +21,10 @@ module.exports = (sequelize, Sequelize) => {
 			defaultValue: false,
 			allowNull: false,
 		},
+		scopes: {
+			type: Sequelize.JSON,
+			defaultValue: ['user'],
+		},
 	});
 
 	return User;
