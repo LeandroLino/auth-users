@@ -12,6 +12,17 @@ module.exports = (app) => {
 			message: 'OK',
 		});
 	});
+	router.put(
+		'/:id/scopes',
+		middleware.checkScopePermission(),
+		user.upgradeScopes
+	);
+	router.get('/admin-only', middleware.onlyAdmin(), (req, res) => {
+		res.json({ message: 'Esta rota é acessível apenas por admins.' });
+	});
+	router.get('/editor-only', middleware.onlyEditor(), (req, res) => {
+		res.json({ message: 'Esta rota é acessível apenas por editors.' });
+	});
 
 	app.use('/api/user', router);
 };

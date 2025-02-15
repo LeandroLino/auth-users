@@ -18,6 +18,12 @@ No terminal, navegue até a pasta onde está o arquivo `docker-compose.yml` e 
 docker-compose up -d
 ```
 
+ou
+
+```
+docker-compose up --build
+```
+
 Para verificar se o contêiner MySQL está rodando, execute:
 
 ```

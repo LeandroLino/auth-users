@@ -12,6 +12,7 @@ const generateToken = (user) => {
 			id: user.id,
 			email: user.email,
 			name: user.name,
+			scopes: user.scopes,
 		},
 		process.env.SECRET_KEY,
 		{ expiresIn: '1h' }
@@ -66,7 +67,6 @@ function validateCPF(cpf) {
 	return true;
 }
 
-// Exporte a função validateCPF
 module.exports = {
 	validateCPF,
 	hashPassword,

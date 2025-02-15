@@ -9,15 +9,12 @@ var corsOptions = {
 
 app.use(cors(corsOptions));
 
-// parse requests of content-type - application/json
 app.use(express.json());
 
-// parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
 const db = require('./app/models');
 
-// Aguarda 10 segundos antes de tentar conectar
 setTimeout(() => {
 	db.sequelize
 		.sync()
@@ -27,7 +24,7 @@ setTimeout(() => {
 		.catch((err) => {
 			console.log('Failed to sync db: ' + err.message);
 		});
-}, 10000); // 10 segundos
+}, 10000);
 
 // // drop the table if it already exists
 // db.sequelize.sync({ force: true }).then(() => {

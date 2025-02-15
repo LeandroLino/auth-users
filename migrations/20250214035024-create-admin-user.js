@@ -8,7 +8,7 @@ module.exports = {
 				{
 					name: 'Admin',
 					email: 'admin@example.com',
-					password: 'senhaSegura123', // Use uma senha segura e hash em produção
+					password: 'senhaSegura123',
 					cpf: '00000000000',
 					isDeleted: false,
 					scopes: JSON.stringify(['admin']),

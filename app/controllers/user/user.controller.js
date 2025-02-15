@@ -60,3 +60,24 @@ exports.login = async (req, res) => {
 		});
 	}
 };
+
+exports.upgradeScopes = async (req, res) => {
+	const { id } = req.params;
+	const { scopes } = req.body;
+
+	try {
+		const user = await User.findByPk(id);
+		if (!user) {
+			return res.status(404).json({ message: 'Usuário não encontrado.' });
+		}
+
+		user.scopes = [...new Set([...user.scopes, ...scopes])];
+		await user.save();
+
+		return res.status(200).json(user);
+	} catch (error) {
+		return res
+			.status(500)
+			.json({ message: 'Erro ao atualizar scopes.', error: error.message });
+	}
+};

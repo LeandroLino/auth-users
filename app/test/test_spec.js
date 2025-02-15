@@ -1,19 +1,16 @@
-const { sequelize } = require('../models'); // Importe a instância do Sequelize
-const UserModel = require('../models/user'); // Importe o modelo que deseja testar
+const { sequelize } = require('../models');
+const UserModel = require('../models/user');
 
 describe('User Model', () => {
 	beforeAll(async () => {
-		// Antes de executar os testes, sincronize o modelo com o banco de dados de teste
 		await sequelize.sync();
 	});
 
 	afterEach(async () => {
-		// Após cada teste, limpe a tabela do banco de dados
 		await UserModel.destroy({ where: {} });
 	});
 
 	afterAll(async () => {
-		// Após todos os testes, encerre a conexão com o banco de dados
 		await sequelize.close();
 	});
 
@@ -44,6 +41,4 @@ describe('User Model', () => {
 		expect(user.name).toBe(existingUser.name);
 		expect(user.email).toBe(existingUser.email);
 	});
-
-	// ... outros testes
 });
